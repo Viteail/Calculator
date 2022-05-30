@@ -1,0 +1,34 @@
+body {
+  margin: 0;
+  height: 100vh;
+}
+
+#content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+#calculator {
+  border: 1px solid black;
+  height: 700px;
+  width: 450px;
+  justify-content: center;
+}
+
+#display {
+  border: 1px solid black;
+  margin: 25px;
+  height: 150px;
+  width: 400px;
+}
+
+#buttons {
+  display: grid;
+  grid-auto-rows: calc(500px / 5);
+  grid-template-columns: repeat(4, calc(450px / 4));
+}
+
+#equals {
+    width: 225px;
+}
