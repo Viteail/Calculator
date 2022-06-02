@@ -1,4 +1,5 @@
 body {
+  background-color: #101010;
   margin: 0;
   height: 100vh;
 }
@@ -26,6 +27,7 @@ body {
 }
 
 #display {
+  display: grid;
   font-weight: bold;
   color: white;
   border: 1px solid black;
@@ -34,12 +36,20 @@ body {
   margin: 25px;
   height: 150px;
   width: 400px;
+  font-size: 24px;
 }
 
 #display-numbers {
-  font-size: 24px;
   position: absolute;
   top: 27%;
+  right: 41%;
+}
+
+#display-second-numbers {
+  color: rgb(167, 167, 167);
+  font-size: 20px;
+  position: absolute;
+  top: 17%;
   right: 41%;
 }
 
