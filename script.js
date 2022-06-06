@@ -7,20 +7,23 @@ const getButtonClear = document.querySelector("#clear");
 let arr = [];
 let secondArr = [];
 let saveArr = [];
+let result = [];
 
 // displayes each button value on display
-
-for (const display of getButtons) {
-  if (display.matches(".number")) {
-    display.addEventListener("click", () => {
-      //      if () {
-      arr.push(`${display.value}`);
-      //     }
-    });
-    display.addEventListener(
-      "click",
-      () => (getDisplay.textContent = arr.join(""))
-    );
+function displayNumbers() {
+  for (const display of getButtons) {
+    if (arr.length === 0) {
+      if (display.matches(".number")) {
+        display.addEventListener("click", () => {
+          // if arr is empty and btn zero is pressed dont aply
+          arr.push(`${display.value}`);
+        });
+        display.addEventListener(
+          "click",
+          () => (getDisplay.textContent = arr.join(""))
+        );
+      }
+    }
   }
 }
 
@@ -30,7 +33,7 @@ function operate() {
       displaySecond.addEventListener("click", () => {
         if (arr.length !== 0) {
           if (secondArr.includes("÷", "+", "-", "x", "%") === false) {
-            // trash ^^^
+            saveArr = arr;
             secondArr.push(`${displaySecond.value}`);
           }
         }
@@ -39,7 +42,7 @@ function operate() {
         "click",
         () =>
           (getSecondDisplay.textContent =
-            `${arr.join("")}` + ` ` + `${secondArr}`)
+            `${saveArr.join("")}` + ` ` + `${secondArr}`)
       );
       displaySecond.addEventListener("click", () => (arr = []));
     }
@@ -58,8 +61,8 @@ getButtonClear.addEventListener("click", () => {
   return (getDisplay.textContent = arr.join(""));
 });
 
+displayNumbers();
 operate();
 
-
 // ideas :
-// when press operate do arr = saveArr and show saveArr on secondDisplays
+// when press operate do arr = saveArr and show saveArr on secondDisplays DONE
