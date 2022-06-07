@@ -14,9 +14,13 @@ function displayNumbers() {
   for (const display of getButtons) {
     if (arr.length === 0) {
       if (display.matches(".number")) {
-        display.addEventListener("click", () => {
-          // if arr is empty and btn zero is pressed dont aply
-          arr.push(`${display.value}`);
+        display.addEventListener("click", (e) => {
+          if (arr.length !== 29) {
+            getDisplay.textContent = "Not Enough Memory..";
+            if (arr.length === 0 && e.target.classList.contains("zero")) {
+              return;
+            } else arr.push(`${display.value}`);
+          }
         });
         display.addEventListener(
           "click",
