@@ -4,27 +4,27 @@ const getButtons = document.querySelectorAll("button");
 const getButtonAllClear = document.querySelector("#all-clear");
 const getButtonClear = document.querySelector("#clear");
 const mainDisplay = document.querySelector("#display");
+const getEqualBtn = document.querySelector("#equals");
 
-let arr = [];
-let secondArr = [];
-let saveArr = [];
-let result = [];
+let firstDisplayData = "";
+let secondDisplayData = "";
+let SaveData = "";
 
 // displayes each button value on display
-function displayNumbers() {
+function display() {
   for (const display of getButtons) {
-    if (arr.length === 0) {
+    if (firstDisplayData === "") {
       if (display.matches(".number")) {
         display.addEventListener("click", (e) => {
-          if (arr.length !== 29) {
-            if (arr.length === 0 && e.target.classList.contains("zero")) {
+          if (firstDisplayData.length !== 29) {
+            if (
+              firstDisplayData === "" &&
+              e.target.classList.contains("zero")
+            ) {
               return;
-            } else arr.push(`${display.value}`);
+            } else firstDisplayData += display.value;
+            return (getDisplay.textContent = firstDisplayData);
           }
-        });
-        display.addEventListener("click", () => {
-          getDisplay.textContent = arr.join("");
-          return console.log(getDisplay.firstChild.textContent);
         });
       }
     }
@@ -35,51 +35,64 @@ function operate() {
   for (const displaySecond of getButtons) {
     if (displaySecond.matches(".operator")) {
       displaySecond.addEventListener("click", () => {
-        if (arr.length !== 0) {
-          if (secondArr.includes("÷", "+", "-", "x", "%") === false) {
-            saveArr = arr;
-            secondArr.push(`${displaySecond.value}`);
+        if (firstDisplayData !== "") {
+          if (secondDisplayData.includes("÷", "+", "-", "x", "%") === false) {
+            SaveData = firstDisplayData;
+            secondDisplayData += displaySecond.value;
+            getSecondDisplay.textContent =
+              SaveData + ` ` + secondDisplayData;
+            return (firstDisplayData = "");
           }
         }
       });
-      displaySecond.addEventListener(
-        "click",
-        () =>
-          (getSecondDisplay.textContent =
-            `${saveArr.join("")}` + ` ` + `${secondArr}`)
-      );
-      displaySecond.addEventListener("click", () => (arr = []));
+
     }
   }
 }
 
-function add() {}
+function add() {
+  const add = +firstDisplayData + +SaveData;
+  getSecondDisplay.textContent = "";
+  getDisplay.textContent = add;
+}
 
-function subtract() {}
+function subtract() {
+  const subtract = +firstDisplayData - +SaveData;
+  getSecondDisplay.textContent = "";
+  getDisplay.textContent = subtract;
+}
 
-function divide() {}
+function divide() {
+  const divide = +firstDisplayData / +SaveData;
+  getSecondDisplay.textContent = "";
+  getDisplay.textContent = divide;
+}
 
-function multiply() {}
+function multiply() {
+  const multiply = +firstDisplayData * +SaveData;
+  getSecondDisplay.textContent = "";
+  getDisplay.textContent = multiply;
+}
 
-function remainder() {}
+function remainder() {
+  const remainder = +firstDisplayData % +SaveData;
+  getSecondDisplay.textContent = "";
+  getDisplay.textContent = remainder;
+}
 
 getButtonAllClear.addEventListener("click", () => {
-  arr = [];
-  secondArr = [];
-  saveArr = [];
-  getDisplay.textContent = arr.join("");
-  getSecondDisplay.textContent = secondArr.join("");
+  firstDisplayData = "";
+  secondDisplayData = "";
+  getDisplay.textContent = firstDisplayData;
+  getSecondDisplay.textContent = secondDisplayData;
 });
 
 getButtonClear.addEventListener("click", () => {
-  arr.pop();
-  return (getDisplay.textContent = arr.join(""));
+  firstDisplayData = firstDisplayData.replace(/\d$/, "");
+  return (getDisplay.textContent = firstDisplayData);
 });
 
-displayNumbers();
+display();
 operate();
 
 // ideas :
-// when press operate do arr = saveArr and show saveArr on secondDisplays DONE
-// get numbers from the secondDisplay
-// getDisplay.firstChild.textContent use this method to calculate numbers
