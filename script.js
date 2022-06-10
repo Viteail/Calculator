@@ -9,6 +9,7 @@ const getEqualBtn = document.querySelector("#equals");
 let firstDisplayData = "";
 let secondDisplayData = "";
 let SaveData = "";
+let resultData = "";
 
 // displayes each button value on display
 function display() {
@@ -23,6 +24,10 @@ function display() {
             ) {
               return;
             } else firstDisplayData += display.value;
+            if (resultData != "") {
+              getSecondDisplay.textContent = "";
+              resultData = "";
+            }
             return (getDisplay.textContent = firstDisplayData);
           }
         });
@@ -39,45 +44,77 @@ function operate() {
           if (secondDisplayData.includes("÷", "+", "-", "x", "%") === false) {
             SaveData = firstDisplayData;
             secondDisplayData += displaySecond.value;
-            getSecondDisplay.textContent =
-              SaveData + ` ` + secondDisplayData;
-            return (firstDisplayData = "");
+            getSecondDisplay.textContent = SaveData + ` ` + secondDisplayData;
+            firstDisplayData = "";
           }
         }
       });
-
+      getEqualBtn.addEventListener("click", result);
     }
   }
 }
 
+function result() {
+  if (secondDisplayData.includes("+")) {
+    add();
+  } else if (secondDisplayData.includes("-")) {
+    subtract();
+  } else if (secondDisplayData.includes("÷")) {
+    divide();
+  } else if (secondDisplayData.includes("x")) {
+    multiply();
+  } else if (secondDisplayData.includes("%")) {
+    remainder();
+  }
+}
+
 function add() {
-  const add = +firstDisplayData + +SaveData;
-  getSecondDisplay.textContent = "";
-  getDisplay.textContent = add;
+  resultData = +SaveData + +firstDisplayData;
+  getSecondDisplay.textContent =
+    SaveData + ` ` + secondDisplayData + ` ` + firstDisplayData + ` ` + `=`;
+  firstDisplayData = "";
+  secondDisplayData = "";
+  SaveData = "";
+  return (getDisplay.textContent = resultData);
 }
 
 function subtract() {
-  const subtract = +firstDisplayData - +SaveData;
-  getSecondDisplay.textContent = "";
-  getDisplay.textContent = subtract;
+  resultData = +SaveData - +firstDisplayData;
+  getSecondDisplay.textContent =
+    SaveData + ` ` + secondDisplayData + ` ` + firstDisplayData + ` ` + `=`;
+  firstDisplayData = "";
+  secondDisplayData = "";
+  SaveData = "";
+  return (getDisplay.textContent = resultData);
 }
 
 function divide() {
-  const divide = +firstDisplayData / +SaveData;
-  getSecondDisplay.textContent = "";
-  getDisplay.textContent = divide;
+  resultData = +SaveData / +firstDisplayData;
+  getSecondDisplay.textContent =
+    SaveData + ` ` + secondDisplayData + ` ` + firstDisplayData + ` ` + `=`;
+  firstDisplayData = "";
+  secondDisplayData = "";
+  SaveData = "";
+  return (getDisplay.textContent = resultData);
 }
 
 function multiply() {
-  const multiply = +firstDisplayData * +SaveData;
-  getSecondDisplay.textContent = "";
-  getDisplay.textContent = multiply;
+  resultData = +SaveData * +firstDisplayData;
+  getSecondDisplay.textContent =
+    SaveData + ` ` + secondDisplayData + ` ` + firstDisplayData + ` ` + `=`;
+  firstDisplayData = "";
+  secondDisplayData = "";
+  return (getDisplay.textContent = resultData);
 }
 
 function remainder() {
-  const remainder = +firstDisplayData % +SaveData;
-  getSecondDisplay.textContent = "";
-  getDisplay.textContent = remainder;
+  resultData = +SaveData % +firstDisplayData;
+  getSecondDisplay.textContent =
+    SaveData + ` ` + secondDisplayData + ` ` + firstDisplayData + ` ` + `=`;
+  firstDisplayData = "";
+  secondDisplayData = "";
+  SaveData = "";
+  return (getDisplay.textContent = resultData);
 }
 
 getButtonAllClear.addEventListener("click", () => {
