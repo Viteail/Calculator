@@ -24,7 +24,9 @@ function display() {
             ) {
               return;
             } else firstDisplayData += display.value;
+            if (getSecondDisplay.textContent != resultData);
             if (resultData != "") {
+              console.log("ur mom")
               getSecondDisplay.textContent = "";
               resultData = "";
             }
@@ -45,26 +47,42 @@ function operate() {
             SaveData = firstDisplayData;
             secondDisplayData += displaySecond.value;
             getSecondDisplay.textContent = SaveData + ` ` + secondDisplayData;
-            firstDisplayData = "";
+            if (secondDisplayData.length !== 2) {
+              firstDisplayData = "";
+            }
           }
         }
       });
       getEqualBtn.addEventListener("click", result);
+      displaySecond.addEventListener("click", (e) => {
+        if (secondDisplayData.length === 2) {
+          if (e.target.classList.contains("add")) {
+            resultData = +SaveData + +firstDisplayData;
+            getSecondDisplay.textContent = resultData + " " + "+";
+            getDisplay.textContent = "";
+            firstDisplayData = "";
+            secondDisplayData = "";
+            SaveData = "";
+          }
+        }
+      });
     }
   }
 }
 
 function result() {
-  if (secondDisplayData.includes("+")) {
-    add();
-  } else if (secondDisplayData.includes("-")) {
-    subtract();
-  } else if (secondDisplayData.includes("÷")) {
-    divide();
-  } else if (secondDisplayData.includes("x")) {
-    multiply();
-  } else if (secondDisplayData.includes("%")) {
-    remainder();
+  if (firstDisplayData !== "" && SaveData !== "") {
+    if (secondDisplayData.includes("+")) {
+      add();
+    } else if (secondDisplayData.includes("-")) {
+      subtract();
+    } else if (secondDisplayData.includes("÷")) {
+      divide();
+    } else if (secondDisplayData.includes("x")) {
+      multiply();
+    } else if (secondDisplayData.includes("%")) {
+      remainder();
+    }
   }
 }
 
@@ -120,6 +138,8 @@ function remainder() {
 getButtonAllClear.addEventListener("click", () => {
   firstDisplayData = "";
   secondDisplayData = "";
+  SaveData = "";
+  resultData = "";
   getDisplay.textContent = firstDisplayData;
   getSecondDisplay.textContent = secondDisplayData;
 });
@@ -132,4 +152,4 @@ getButtonClear.addEventListener("click", () => {
 display();
 operate();
 
-// ideas :
+// ideas : 0
