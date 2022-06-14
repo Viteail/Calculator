@@ -24,11 +24,10 @@ function display() {
             ) {
               return;
             } else firstDisplayData += display.value;
-            if (getSecondDisplay.textContent != resultData);
+
             if (resultData != "") {
-              console.log("ur mom")
+              console.log("beep");
               getSecondDisplay.textContent = "";
-              resultData = "";
             }
             return (getDisplay.textContent = firstDisplayData);
           }
@@ -58,11 +57,44 @@ function operate() {
         if (secondDisplayData.length === 2) {
           if (e.target.classList.contains("add")) {
             resultData = +SaveData + +firstDisplayData;
-            getSecondDisplay.textContent = resultData + " " + "+";
-            getDisplay.textContent = "";
+            secondDisplayData = "+";
+            getSecondDisplay.textContent = resultData + " " + secondDisplayData;
+            getDisplay.textContent = resultData;
             firstDisplayData = "";
+            SaveData = resultData;
+            resultData = "";
+          } else if (e.target.classList.contains("subtract")) {
+            resultData = +SaveData - +firstDisplayData;
+            getSecondDisplay.textContent = resultData + " " + "+";
+            getDisplay.textContent = resultData;
+            firstDisplayData = resultData;
             secondDisplayData = "";
             SaveData = "";
+            resultData = "";
+          } else if (e.target.classList.contains("divide")) {
+            resultData = +SaveData / +firstDisplayData;
+            getSecondDisplay.textContent = resultData + " " + "+";
+            getDisplay.textContent = resultData;
+            firstDisplayData = resultData;
+            secondDisplayData = "";
+            SaveData = "";
+            resultData = "";
+          } else if (e.target.classList.contains("multiply")) {
+            resultData = +SaveData * +firstDisplayData;
+            getSecondDisplay.textContent = resultData + " " + "+";
+            getDisplay.textContent = resultData;
+            firstDisplayData = resultData;
+            secondDisplayData = "";
+            SaveData = "";
+            resultData = "";
+          } else if (e.target.classList.contains("remainder")) {
+            resultData = +SaveData % +firstDisplayData;
+            getSecondDisplay.textContent = resultData + " " + "+";
+            getDisplay.textContent = resultData;
+            firstDisplayData = resultData;
+            secondDisplayData = "";
+            SaveData = "";
+            resultData = "";
           }
         }
       });
@@ -90,49 +122,54 @@ function add() {
   resultData = +SaveData + +firstDisplayData;
   getSecondDisplay.textContent =
     SaveData + ` ` + secondDisplayData + ` ` + firstDisplayData + ` ` + `=`;
-  firstDisplayData = "";
+  firstDisplayData = resultData;
   secondDisplayData = "";
   SaveData = "";
-  return (getDisplay.textContent = resultData);
+  resultData = "";
+  return (getDisplay.textContent = firstDisplayData);
 }
 
 function subtract() {
   resultData = +SaveData - +firstDisplayData;
   getSecondDisplay.textContent =
     SaveData + ` ` + secondDisplayData + ` ` + firstDisplayData + ` ` + `=`;
-  firstDisplayData = "";
+  firstDisplayData = resultData;
   secondDisplayData = "";
   SaveData = "";
-  return (getDisplay.textContent = resultData);
+  resultData = "";
+  return (getDisplay.textContent = firstDisplayData);
 }
 
 function divide() {
   resultData = +SaveData / +firstDisplayData;
   getSecondDisplay.textContent =
     SaveData + ` ` + secondDisplayData + ` ` + firstDisplayData + ` ` + `=`;
-  firstDisplayData = "";
+  firstDisplayData = resultData;
   secondDisplayData = "";
   SaveData = "";
-  return (getDisplay.textContent = resultData);
+  resultData = "";
+  return (getDisplay.textContent = firstDisplayData);
 }
 
 function multiply() {
   resultData = +SaveData * +firstDisplayData;
   getSecondDisplay.textContent =
     SaveData + ` ` + secondDisplayData + ` ` + firstDisplayData + ` ` + `=`;
-  firstDisplayData = "";
+  firstDisplayData = resultData;
   secondDisplayData = "";
-  return (getDisplay.textContent = resultData);
+  resultData = "";
+  return (getDisplay.textContent = firstDisplayData);
 }
 
 function remainder() {
   resultData = +SaveData % +firstDisplayData;
   getSecondDisplay.textContent =
     SaveData + ` ` + secondDisplayData + ` ` + firstDisplayData + ` ` + `=`;
-  firstDisplayData = "";
+  firstDisplayData = resultData;
   secondDisplayData = "";
   SaveData = "";
-  return (getDisplay.textContent = resultData);
+  resultData = "";
+  return (getDisplay.textContent = firstDisplayData);
 }
 
 getButtonAllClear.addEventListener("click", () => {
