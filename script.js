@@ -11,7 +11,7 @@ let secondDisplayData = "";
 let SaveData = "";
 let resultData = "";
 
-// displayes each button value on display
+// displayes each button value with class .number on display
 function display() {
   for (const display of getButtons) {
     if (firstDisplayData === "") {
@@ -24,11 +24,6 @@ function display() {
             ) {
               return;
             } else firstDisplayData += display.value;
-
-            if (resultData != "") {
-              console.log("beep");
-              getSecondDisplay.textContent = "";
-            }
             return (getDisplay.textContent = firstDisplayData);
           }
         });
@@ -36,65 +31,121 @@ function display() {
     }
   }
 }
-
+// saves data from firstDisplayData to SaveData and displayes each button value with class operator on secondDisplay
 function operate() {
   for (const displaySecond of getButtons) {
     if (displaySecond.matches(".operator")) {
       displaySecond.addEventListener("click", () => {
         if (firstDisplayData !== "") {
-          if (secondDisplayData.includes("÷", "+", "-", "x", "%") === false) {
+          if (SaveData === "" && firstDisplayData !== "") {
             SaveData = firstDisplayData;
-            secondDisplayData += displaySecond.value;
-            getSecondDisplay.textContent = SaveData + ` ` + secondDisplayData;
-            if (secondDisplayData.length !== 2) {
-              firstDisplayData = "";
-            }
+          }
+          secondDisplayData += displaySecond.value;
+          getSecondDisplay.textContent = SaveData + ` ` + secondDisplayData;
+          if (secondDisplayData.length !== 2) {
+            firstDisplayData = "";
           }
         }
       });
       getEqualBtn.addEventListener("click", result);
+      // evaluate a single pair of numbers at a time
       displaySecond.addEventListener("click", (e) => {
         if (secondDisplayData.length === 2) {
           if (e.target.classList.contains("add")) {
-            resultData = +SaveData + +firstDisplayData;
+            if (secondDisplayData.includes("++")) {
+              resultData = +SaveData + +firstDisplayData;
+            } else if (secondDisplayData.includes("-+")) {
+              resultData = +SaveData - +firstDisplayData;
+            } else if (secondDisplayData.includes("÷+")) {
+              resultData = +SaveData / +firstDisplayData;
+            } else if (secondDisplayData.includes("x+")) {
+              resultData = +SaveData * +firstDisplayData;
+            } else if (secondDisplayData.includes("%+")) {
+              resultData = +SaveData % +firstDisplayData;
+            }
             secondDisplayData = "+";
             getSecondDisplay.textContent = resultData + " " + secondDisplayData;
-            getDisplay.textContent = resultData;
+            firstDisplayData = resultData;
+            SaveData = firstDisplayData;
+            resultData = "";
+            getDisplay.textContent = firstDisplayData;
             firstDisplayData = "";
-            SaveData = resultData;
-            resultData = "";
           } else if (e.target.classList.contains("subtract")) {
-            resultData = +SaveData - +firstDisplayData;
-            getSecondDisplay.textContent = resultData + " " + "+";
-            getDisplay.textContent = resultData;
+            if (secondDisplayData.includes("+-")) {
+              resultData = +SaveData + +firstDisplayData;
+            } else if (secondDisplayData.includes("--")) {
+              resultData = +SaveData - +firstDisplayData;
+            } else if (secondDisplayData.includes("÷-")) {
+              resultData = +SaveData / +firstDisplayData;
+            } else if (secondDisplayData.includes("x-")) {
+              resultData = +SaveData * +firstDisplayData;
+            } else if (secondDisplayData.includes("%-")) {
+              resultData = +SaveData % +firstDisplayData;
+            }
+            secondDisplayData = "-";
+            getSecondDisplay.textContent = resultData + " " + secondDisplayData;
             firstDisplayData = resultData;
-            secondDisplayData = "";
-            SaveData = "";
+            SaveData = firstDisplayData;
             resultData = "";
+            getDisplay.textContent = firstDisplayData;
+            firstDisplayData = "";
           } else if (e.target.classList.contains("divide")) {
-            resultData = +SaveData / +firstDisplayData;
-            getSecondDisplay.textContent = resultData + " " + "+";
-            getDisplay.textContent = resultData;
+            if (secondDisplayData.includes("+÷")) {
+              resultData = +SaveData + +firstDisplayData;
+            } else if (secondDisplayData.includes("-÷")) {
+              resultData = +SaveData - +firstDisplayData;
+            } else if (secondDisplayData.includes("÷÷")) {
+              resultData = +SaveData / +firstDisplayData;
+            } else if (secondDisplayData.includes("x÷")) {
+              resultData = +SaveData * +firstDisplayData;
+            } else if (secondDisplayData.includes("%÷")) {
+              resultData = +SaveData % +firstDisplayData;
+            }
+            secondDisplayData = "÷";
+            getSecondDisplay.textContent = resultData + " " + secondDisplayData;
             firstDisplayData = resultData;
-            secondDisplayData = "";
-            SaveData = "";
+            SaveData = firstDisplayData;
             resultData = "";
+            getDisplay.textContent = firstDisplayData;
+            firstDisplayData = "";
           } else if (e.target.classList.contains("multiply")) {
-            resultData = +SaveData * +firstDisplayData;
-            getSecondDisplay.textContent = resultData + " " + "+";
-            getDisplay.textContent = resultData;
+            if (secondDisplayData.includes("+x")) {
+              resultData = +SaveData + +firstDisplayData;
+            } else if (secondDisplayData.includes("-x")) {
+              resultData = +SaveData - +firstDisplayData;
+            } else if (secondDisplayData.includes("÷x")) {
+              resultData = +SaveData / +firstDisplayData;
+            } else if (secondDisplayData.includes("xx")) {
+              resultData = +SaveData * +firstDisplayData;
+            } else if (secondDisplayData.includes("%x")) {
+              resultData = +SaveData % +firstDisplayData;
+            }
+            secondDisplayData = "x";
+            getSecondDisplay.textContent = resultData + " " + secondDisplayData;
             firstDisplayData = resultData;
-            secondDisplayData = "";
-            SaveData = "";
+            SaveData = firstDisplayData;
             resultData = "";
+            getDisplay.textContent = firstDisplayData;
+            firstDisplayData = "";
           } else if (e.target.classList.contains("remainder")) {
-            resultData = +SaveData % +firstDisplayData;
-            getSecondDisplay.textContent = resultData + " " + "+";
-            getDisplay.textContent = resultData;
+            if (secondDisplayData.includes("+%")) {
+              resultData = +SaveData + +firstDisplayData;
+            } else if (secondDisplayData.includes("-%")) {
+              resultData = +SaveData - +firstDisplayData;
+            } else if (secondDisplayData.includes("÷%")) {
+              resultData = +SaveData / +firstDisplayData;
+            } else if (secondDisplayData.includes("x%")) {
+              resultData = +SaveData * +firstDisplayData;
+            } else if (secondDisplayData.includes("%%")) {
+              resultData = +SaveData % +firstDisplayData;
+            }
+            secondDisplayData = "%";
+            getSecondDisplay.textContent = resultData + " " + secondDisplayData;
             firstDisplayData = resultData;
-            secondDisplayData = "";
-            SaveData = "";
+            SaveData = firstDisplayData;
             resultData = "";
+            getDisplay.textContent = firstDisplayData;
+            firstDisplayData = "";
           }
         }
       });
