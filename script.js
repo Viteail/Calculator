@@ -5,6 +5,7 @@ const getButtonAllClear = document.querySelector("#all-clear");
 const getButtonClear = document.querySelector("#clear");
 const mainDisplay = document.querySelector("#display");
 const getEqualBtn = document.querySelector("#equals");
+const getPeriod = document.querySelector("#period");
 
 let firstDisplayData = "";
 let secondDisplayData = "";
@@ -18,20 +19,29 @@ function display() {
       if (display.matches(".number")) {
         display.addEventListener("click", (e) => {
           if (firstDisplayData.length !== 29) {
-            if (
-              firstDisplayData === "" &&
-              e.target.classList.contains("zero")
+            if (firstDisplayData !== "0" && e.target.matches(".number")) {
+              firstDisplayData += display.value;
+            } else if (
+              firstDisplayData === "0" &&
+              e.target.matches(".number")
             ) {
-              return;
-            } else firstDisplayData += display.value;
+              firstDisplayData = "";
+              firstDisplayData += display.value;
+            }
             return (getDisplay.textContent = firstDisplayData);
           }
         });
       }
+      getPeriod.addEventListener("click", () => {
+        if (firstDisplayData !== "" && firstDisplayData.includes(".") === false) {
+          firstDisplayData += getPeriod.value;
+          return getDisplay.textContent = firstDisplayData;
+        }
+      })
     }
   }
 }
-// saves data from firstDisplayData to SaveData and displayes each button value with class operator on secondDisplay
+// saves data from firstDisplayData to SaveData and displayes each button value with class .operator on secondDisplay
 function operate() {
   for (const displaySecond of getButtons) {
     if (displaySecond.matches(".operator")) {
@@ -233,7 +243,11 @@ getButtonAllClear.addEventListener("click", () => {
 });
 
 getButtonClear.addEventListener("click", () => {
-  firstDisplayData = firstDisplayData.replace(/\d$/, "");
+  if (firstDisplayData.length === 1 || firstDisplayData.length === 0) {
+    firstDisplayData = "0";
+  } else if (firstDisplayData !== "") {
+    firstDisplayData = firstDisplayData.replace(/\d$/, "");
+  }
   return (getDisplay.textContent = firstDisplayData);
 });
 
