@@ -33,14 +33,34 @@ function display() {
         });
       }
       getPeriod.addEventListener("click", () => {
-        if (firstDisplayData !== "" && firstDisplayData.includes(".") === false) {
-          firstDisplayData += getPeriod.value;
-          return getDisplay.textContent = firstDisplayData;
+        if (getDisplay.textContent === "0") {
+          firstDisplayData = "0";
         }
-      })
+
+        if (
+          firstDisplayData !== "" &&
+          firstDisplayData.includes(".") === false
+        ) {
+          firstDisplayData += getPeriod.value;
+          return (getDisplay.textContent = firstDisplayData);
+        }
+      });
     }
   }
 }
+
+function displayError() {
+  if (firstDisplayData === Infinity) {
+    firstDisplayData = "";
+    SaveData = "";
+    secondDisplayData = "";
+    resultData = "";
+    getSecondDisplay.textContent = "";
+    getDisplay.textContent = "Error!";
+  }
+  return;
+}
+
 // saves data from firstDisplayData to SaveData and displayes each button value with class .operator on secondDisplay
 function operate() {
   for (const displaySecond of getButtons) {
@@ -79,6 +99,7 @@ function operate() {
             SaveData = firstDisplayData;
             resultData = "";
             getDisplay.textContent = firstDisplayData;
+            displayError();
             firstDisplayData = "";
           } else if (e.target.classList.contains("subtract")) {
             if (secondDisplayData.includes("+-")) {
@@ -98,6 +119,7 @@ function operate() {
             SaveData = firstDisplayData;
             resultData = "";
             getDisplay.textContent = firstDisplayData;
+            displayError();
             firstDisplayData = "";
           } else if (e.target.classList.contains("divide")) {
             if (secondDisplayData.includes("+÷")) {
@@ -117,6 +139,7 @@ function operate() {
             SaveData = firstDisplayData;
             resultData = "";
             getDisplay.textContent = firstDisplayData;
+            displayError();
             firstDisplayData = "";
           } else if (e.target.classList.contains("multiply")) {
             if (secondDisplayData.includes("+x")) {
@@ -136,6 +159,7 @@ function operate() {
             SaveData = firstDisplayData;
             resultData = "";
             getDisplay.textContent = firstDisplayData;
+            displayError();
             firstDisplayData = "";
           } else if (e.target.classList.contains("remainder")) {
             if (secondDisplayData.includes("+%")) {
@@ -155,6 +179,7 @@ function operate() {
             SaveData = firstDisplayData;
             resultData = "";
             getDisplay.textContent = firstDisplayData;
+            displayError();
             firstDisplayData = "";
           }
         }
@@ -187,7 +212,8 @@ function add() {
   secondDisplayData = "";
   SaveData = "";
   resultData = "";
-  return (getDisplay.textContent = firstDisplayData);
+  getDisplay.textContent = firstDisplayData
+  displayError();
 }
 
 function subtract() {
@@ -198,7 +224,8 @@ function subtract() {
   secondDisplayData = "";
   SaveData = "";
   resultData = "";
-  return (getDisplay.textContent = firstDisplayData);
+  getDisplay.textContent = firstDisplayData
+  displayError();
 }
 
 function divide() {
@@ -209,7 +236,8 @@ function divide() {
   secondDisplayData = "";
   SaveData = "";
   resultData = "";
-  return (getDisplay.textContent = firstDisplayData);
+  getDisplay.textContent = firstDisplayData
+  displayError();
 }
 
 function multiply() {
@@ -219,7 +247,8 @@ function multiply() {
   firstDisplayData = resultData;
   secondDisplayData = "";
   resultData = "";
-  return (getDisplay.textContent = firstDisplayData);
+  getDisplay.textContent = firstDisplayData
+  displayError();
 }
 
 function remainder() {
@@ -230,7 +259,8 @@ function remainder() {
   secondDisplayData = "";
   SaveData = "";
   resultData = "";
-  return (getDisplay.textContent = firstDisplayData);
+  getDisplay.textContent = firstDisplayData
+  displayError();
 }
 
 getButtonAllClear.addEventListener("click", () => {
