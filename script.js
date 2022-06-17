@@ -6,6 +6,7 @@ const getButtonClear = document.querySelector("#clear");
 const mainDisplay = document.querySelector("#display");
 const getEqualBtn = document.querySelector("#equals");
 const getPeriod = document.querySelector("#period");
+const getNegativeBtn = document.querySelector("#negative");
 
 let firstDisplayData = "";
 let secondDisplayData = "";
@@ -45,7 +46,26 @@ function display() {
           return (getDisplay.textContent = firstDisplayData);
         }
       });
+      getNegativeBtn.addEventListener("click", negativeNumbers);
     }
+  }
+}
+
+function negativeNumbers() {
+  if (
+    firstDisplayData !== "0" &&
+    firstDisplayData !== "" &&
+    firstDisplayData.charAt(0) !== "-"
+  ) {
+    firstDisplayData = "-" + firstDisplayData;
+    getDisplay.textContent = firstDisplayData;
+  } else if (
+    firstDisplayData !== "0" &&
+    firstDisplayData !== "" &&
+    firstDisplayData.charAt(0) === "-"
+  ) {
+    firstDisplayData = firstDisplayData.slice(1);
+    getDisplay.textContent = firstDisplayData;
   }
 }
 
@@ -93,6 +113,7 @@ function operate() {
             } else if (secondDisplayData.includes("%+")) {
               resultData = +SaveData % +firstDisplayData;
             }
+            resultData = '' + resultData; 
             secondDisplayData = "+";
             getSecondDisplay.textContent = resultData + " " + secondDisplayData;
             firstDisplayData = resultData;
@@ -113,6 +134,7 @@ function operate() {
             } else if (secondDisplayData.includes("%-")) {
               resultData = +SaveData % +firstDisplayData;
             }
+            resultData = '' + resultData;
             secondDisplayData = "-";
             getSecondDisplay.textContent = resultData + " " + secondDisplayData;
             firstDisplayData = resultData;
@@ -133,6 +155,7 @@ function operate() {
             } else if (secondDisplayData.includes("%÷")) {
               resultData = +SaveData % +firstDisplayData;
             }
+            resultData = '' + resultData;
             secondDisplayData = "÷";
             getSecondDisplay.textContent = resultData + " " + secondDisplayData;
             firstDisplayData = resultData;
@@ -153,6 +176,7 @@ function operate() {
             } else if (secondDisplayData.includes("%x")) {
               resultData = +SaveData % +firstDisplayData;
             }
+            resultData = '' + resultData;
             secondDisplayData = "x";
             getSecondDisplay.textContent = resultData + " " + secondDisplayData;
             firstDisplayData = resultData;
@@ -173,6 +197,7 @@ function operate() {
             } else if (secondDisplayData.includes("%%")) {
               resultData = +SaveData % +firstDisplayData;
             }
+            resultData = '' + resultData;
             secondDisplayData = "%";
             getSecondDisplay.textContent = resultData + " " + secondDisplayData;
             firstDisplayData = resultData;
@@ -206,60 +231,65 @@ function result() {
 
 function add() {
   resultData = +SaveData + +firstDisplayData;
+  resultData = '' + resultData;
   getSecondDisplay.textContent =
     SaveData + ` ` + secondDisplayData + ` ` + firstDisplayData + ` ` + `=`;
   firstDisplayData = resultData;
   secondDisplayData = "";
   SaveData = "";
   resultData = "";
-  getDisplay.textContent = firstDisplayData
+  getDisplay.textContent = firstDisplayData;
   displayError();
 }
 
 function subtract() {
   resultData = +SaveData - +firstDisplayData;
+  resultData = '' + resultData;
   getSecondDisplay.textContent =
     SaveData + ` ` + secondDisplayData + ` ` + firstDisplayData + ` ` + `=`;
   firstDisplayData = resultData;
   secondDisplayData = "";
   SaveData = "";
   resultData = "";
-  getDisplay.textContent = firstDisplayData
+  getDisplay.textContent = firstDisplayData;
   displayError();
 }
 
 function divide() {
   resultData = +SaveData / +firstDisplayData;
+  resultData = '' + resultData;
   getSecondDisplay.textContent =
     SaveData + ` ` + secondDisplayData + ` ` + firstDisplayData + ` ` + `=`;
   firstDisplayData = resultData;
   secondDisplayData = "";
   SaveData = "";
   resultData = "";
-  getDisplay.textContent = firstDisplayData
+  getDisplay.textContent = firstDisplayData;
   displayError();
 }
 
 function multiply() {
   resultData = +SaveData * +firstDisplayData;
+  resultData = '' + resultData;
   getSecondDisplay.textContent =
     SaveData + ` ` + secondDisplayData + ` ` + firstDisplayData + ` ` + `=`;
   firstDisplayData = resultData;
   secondDisplayData = "";
   resultData = "";
-  getDisplay.textContent = firstDisplayData
+  getDisplay.textContent = firstDisplayData;
   displayError();
 }
 
 function remainder() {
   resultData = +SaveData % +firstDisplayData;
+  resultData = '' + resultData;
   getSecondDisplay.textContent =
     SaveData + ` ` + secondDisplayData + ` ` + firstDisplayData + ` ` + `=`;
   firstDisplayData = resultData;
   secondDisplayData = "";
   SaveData = "";
   resultData = "";
-  getDisplay.textContent = firstDisplayData
+  getDisplay.textContent = firstDisplayData;
   displayError();
 }
 
