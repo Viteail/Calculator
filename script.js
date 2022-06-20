@@ -14,6 +14,27 @@ let SaveData = "";
 let resultData = "";
 
 // displayes each button value with class .number on display
+
+document.addEventListener("keydown", keyboardEvent);
+
+// keyboard support
+
+function keyboardEvent(e) {
+  if (firstDisplayData.length !== 29) {
+    if (
+      (e.keyCode >= 48 && e.keyCode <= 57 && firstDisplayData !== "0") ||
+      (e.keyCode >= 96 && e.keyCode <= 105 && firstDisplayData !== "0")
+    ) {
+      console.log(e.keyCode);
+      firstDisplayData += e.key;
+    } else if (firstDisplayData === "0") {
+      firstDisplayData = "";
+      firstDisplayData += e.key;
+    }
+    getDisplay.textContent = firstDisplayData;
+  }
+}
+
 function display() {
   for (const display of getButtons) {
     if (firstDisplayData === "") {
@@ -113,7 +134,7 @@ function operate() {
             } else if (secondDisplayData.includes("%+")) {
               resultData = +SaveData % +firstDisplayData;
             }
-            resultData = '' + resultData; 
+            resultData = "" + resultData;
             secondDisplayData = "+";
             getSecondDisplay.textContent = resultData + " " + secondDisplayData;
             firstDisplayData = resultData;
@@ -134,7 +155,7 @@ function operate() {
             } else if (secondDisplayData.includes("%-")) {
               resultData = +SaveData % +firstDisplayData;
             }
-            resultData = '' + resultData;
+            resultData = "" + resultData;
             secondDisplayData = "-";
             getSecondDisplay.textContent = resultData + " " + secondDisplayData;
             firstDisplayData = resultData;
@@ -155,7 +176,7 @@ function operate() {
             } else if (secondDisplayData.includes("%÷")) {
               resultData = +SaveData % +firstDisplayData;
             }
-            resultData = '' + resultData;
+            resultData = "" + resultData;
             secondDisplayData = "÷";
             getSecondDisplay.textContent = resultData + " " + secondDisplayData;
             firstDisplayData = resultData;
@@ -176,7 +197,7 @@ function operate() {
             } else if (secondDisplayData.includes("%x")) {
               resultData = +SaveData % +firstDisplayData;
             }
-            resultData = '' + resultData;
+            resultData = "" + resultData;
             secondDisplayData = "x";
             getSecondDisplay.textContent = resultData + " " + secondDisplayData;
             firstDisplayData = resultData;
@@ -197,7 +218,7 @@ function operate() {
             } else if (secondDisplayData.includes("%%")) {
               resultData = +SaveData % +firstDisplayData;
             }
-            resultData = '' + resultData;
+            resultData = "" + resultData;
             secondDisplayData = "%";
             getSecondDisplay.textContent = resultData + " " + secondDisplayData;
             firstDisplayData = resultData;
@@ -231,7 +252,7 @@ function result() {
 
 function add() {
   resultData = +SaveData + +firstDisplayData;
-  resultData = '' + resultData;
+  resultData = "" + resultData;
   getSecondDisplay.textContent =
     SaveData + ` ` + secondDisplayData + ` ` + firstDisplayData + ` ` + `=`;
   firstDisplayData = resultData;
@@ -244,7 +265,7 @@ function add() {
 
 function subtract() {
   resultData = +SaveData - +firstDisplayData;
-  resultData = '' + resultData;
+  resultData = "" + resultData;
   getSecondDisplay.textContent =
     SaveData + ` ` + secondDisplayData + ` ` + firstDisplayData + ` ` + `=`;
   firstDisplayData = resultData;
@@ -257,7 +278,7 @@ function subtract() {
 
 function divide() {
   resultData = +SaveData / +firstDisplayData;
-  resultData = '' + resultData;
+  resultData = "" + resultData;
   getSecondDisplay.textContent =
     SaveData + ` ` + secondDisplayData + ` ` + firstDisplayData + ` ` + `=`;
   firstDisplayData = resultData;
@@ -270,7 +291,7 @@ function divide() {
 
 function multiply() {
   resultData = +SaveData * +firstDisplayData;
-  resultData = '' + resultData;
+  resultData = "" + resultData;
   getSecondDisplay.textContent =
     SaveData + ` ` + secondDisplayData + ` ` + firstDisplayData + ` ` + `=`;
   firstDisplayData = resultData;
@@ -282,7 +303,7 @@ function multiply() {
 
 function remainder() {
   resultData = +SaveData % +firstDisplayData;
-  resultData = '' + resultData;
+  resultData = "" + resultData;
   getSecondDisplay.textContent =
     SaveData + ` ` + secondDisplayData + ` ` + firstDisplayData + ` ` + `=`;
   firstDisplayData = resultData;
