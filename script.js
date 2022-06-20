@@ -16,18 +16,26 @@ let resultData = "";
 // displayes each button value with class .number on display
 
 document.addEventListener("keydown", keyboardEvent);
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Backspace") {
+    if (firstDisplayData.length === 1 || firstDisplayData.length === 0) {
+      firstDisplayData = "0";
+    } else if (firstDisplayData !== "" && firstDisplayData !== "0") {
+      firstDisplayData = firstDisplayData.replace(/\d$/, "");
+    }
+  }
+  return (getDisplay.textContent = firstDisplayData);
+});
 
 // keyboard support
 
 function keyboardEvent(e) {
   if (firstDisplayData.length !== 29) {
     if (
-      (e.keyCode >= 48 && e.keyCode <= 57 && firstDisplayData !== "0") ||
-      (e.keyCode >= 96 && e.keyCode <= 105 && firstDisplayData !== "0")
+      (e.key >= 0 && e.key <= 9 && firstDisplayData !== "0")
     ) {
-      console.log(e.keyCode);
       firstDisplayData += e.key;
-    } else if (firstDisplayData === "0") {
+    } else if (firstDisplayData === "0" && e.key >= 0 && e.key <= 9) {
       firstDisplayData = "";
       firstDisplayData += e.key;
     }
