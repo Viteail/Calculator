@@ -99,7 +99,7 @@ function negativeNumbers() {
 }
 
 function displayError() {
-  if (firstDisplayData === Infinity) {
+  if (firstDisplayData === 'Infinity') {
     firstDisplayData = "";
     SaveData = "";
     secondDisplayData = "";
